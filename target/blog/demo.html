@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Insert title here</title>
+    <link rel="stylesheet" type="text/css" href="css.css"/>
+    <style type="text/css">
+
+
+
+
+    </style>
+    <script>
+
+        //第一步，创建XMLHttpRequest对象
+        var xmlHttp = new XMLHttpRequest();
+        function CommentAll() {
+            //第二步，注册回调函数
+            xmlHttp.onreadystatechange =function ()
+            {
+                if (xmlHttp.readyState == 4){
+                    if (xmlHttp.status == 200) {
+                        callback1();
+                        var responseText = xmlHttp.responseText;
+                    }
+                    }
+            }
+            xmlHttp.open("get", "/blog1_war/info", true);
+            xmlHttp.send();
+
+        }
+        //第五步，创建回调函数
+        function callback1() {
+
+            if (xmlHttp.readyState == 4)
+                if (xmlHttp.status == 200) {
+                    //取得返回的数据
+                    var data = xmlHttp.responseText;
+                    var box =document.getElementById('wrapper');
+                    var m = '';
+                    //json字符串转为json格式
+                   // data=eval("("+data+")");
+                    alert(data)
+                    data = JSON.parse(data);
+                    console.log(data);
+                    //data = eval(data);
+                    for (var i = 0; i < data.length; i++) {
+
+                        var username = data[i].username;
+                        var texts = data[i].text;
+                        var title = data[i].title;
+                        //  $.each(data, function (index, obj) {
+                        //  $("#box").append("<div>"+"<p class='item_content'>" +
+                        m +='<div class="item">\n' +
+                            '            <div class="item_img">\n' +
+                            '                <img src="xue.jpg" alt="image"/>\n' +
+                            '            </div>\n'
+                        m += '<div class="item_content"> <h3>'+title+' </h3>'
+                        m += ' <p class= "item_info" >'+ username+' </p>'
+                        m += ' <p class= "item_desc" >'+ texts+' </p>'
+                        m += ' <button type = "button" onclick = "loadXMLDoc()" > 查看原文 </button></div >';
+                        m +='</div>'
+                        box.innerHTML=m;
+                    }
+
+                }
+        }
+        CommentAll();
+    </script>
+</head>
+<body>
+<div id="wrapper">
+    <div class="main">
+
+    </div></div>
+
+</body>
+</html>

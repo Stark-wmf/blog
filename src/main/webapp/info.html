@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script>
+        function loadXMLDoc()
+        {
+            var xmlhttp;
+            if (window.XMLHttpRequest)
+            {
+                //  IE7+, Firefox, Chrome, Opera, Safari 浏览器执行代码
+                xmlhttp=new XMLHttpRequest();
+            }
+            else
+            {
+                // IE6, IE5 浏览器执行代码
+                xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+            }
+            xmlhttp.onreadystatechange=function()
+            {
+                if (xmlhttp.readyState==4 && xmlhttp.status==200)
+                {
+                    document.getElementById("item_content").innerHTML=xmlhttp.responseText;
+                }
+        }
+            xmlhttp.open("GET","/info",true);
+            xmlhttp.send();
+        }
+        //第一步，创建XMLHttpRequest对象
+        var xmlHttp1 = new XMLHttpRequest();
+        function CommentAll() {
+            //第二步，注册回调函数
+            xmlHttp1.onreadystatechange =function ()
+            {
+                if (xmlHttp1.readyState == 4){
+                    if (xmlHttp1.status == 200) {
+                        callback1();
+                        var responseText = xmlHttp1.responseText;
+                    }
+                }
+            }
+            xmlHttp1.open("get", "http://localhost:8080/blog1_war/info", true);
+            xmlHttp1.send();
+
+        }
+        //第五步，创建回调函数
+        function callback1() {
+
+            if (xmlHttp1.readyState == 4)
+                if (xmlHttp1.status == 200) {
+                    //取得返回的数据
+                    var data = xmlHttp1.responseText;
+                    //document.getElementsByClassName("main");
+                    var m = "";
+                    //json字符串转为json格式
+                    // data=eval("("+data+")");
+                    //alert(data)
+                    data = JSON.parse(data);
+                    console.log(data);
+                    //data = eval(data);
+                    for (var i = 0; i < data.length; i++) {
+                        var username = data[i].username;
+                        var texts = data[i].id;
+                        var title = data[i].title;
+                        //  $.each(data, function (index, obj) {
+                        //  $("#box").append("<div>"+"<p class='item_content'>" +
+                        m +='<div class="item">\n'+
+                            '            <div class="item_img">\n' +
+                            '                <img src="xue.jpg" alt="image"/>\n' +
+                            '            </div>\n';
+                        m += '<div class="item_content"> <h3>'+title+' </h3>';
+                        m += ' <p class= "item_info" >'+ username+' </p>';
+                        m += ' <p class= "item_desc" >'+ texts+' </p>';
+                        //m += ' <button type = "button" onclick = "loadXMLDoc()" > 查看原文 </button></div >';
+                        m +='</div>';
+                        document.getElementsByClassName("main").innerHTML=m;
+                    }
+
+                }
+        }
+        CommentAll();
+    </script>
+    <title>主页</title>
+    <link rel="stylesheet" type="text/css" href="css.css"/>
+
+</head>
+<body>
+<div id="header">
+    <div class="logo_title">
+        <h3>Sw的奇思妙想</h3>
+        <p>关于成长和学习的记录与感悟</p>
+    </div>
+    <div class="navi">
+        <ul>
+            <li><a href="http://localhost:8080/blog1_war/info.html">首页</a></li>
+            <li><a href="http://localhost:8080/blog1_war/index.html">闲言碎语</a></li>
+            <li><a href="http://localhost:8080/blog1_war/index.html">我是谁</a></li>
+        </ul>
+    </div>
+    <div class="clear"></div>
+
+</div>
+
+<!--中部-->
+<div id="wrapper">
+    <!---->
+    <div class="main">
+
+        <!--<div class="item">-->
+            <!--<div class="item_img">-->
+                <!--<img src="xue.jpg" alt="image"/>-->
+            <!--</div>-->
+
+            <!--<div class="item_content">-->
+                <!--<h3>示例标题示例标题</h3>-->
+                <!--<p class="item_info">作者:S </p>-->
+                <!--<p class="item_desc">示例内容示例内容示例内容示例内容示例内容示例内容示例内容示例内容示例内容示例内容示例内容示例内容</p>-->
+                <!--<button type="button" onclick="loadXMLDoc()">查看原文</button>-->
+            <!--</div>-->
+        <!--</div>-->
+
+        <!--<div class="item">-->
+            <!--<div class="item_img">-->
+                <!--<img src="yang.jpg" alt="image"/>-->
+            <!--</div>-->
+
+            <!--<div class="item_content">-->
+                <!--<h3>示例标题示例标题</h3>-->
+                <!--<p class="item_info">作者:Sw </p>-->
+                <!--<p class="item_desc">示例内容示例内容示例内容示例内容示例内容示例内容示例内容示例内容示例内容示例内容示例内容示例内容</p>-->
+            <!--</div>-->
+        <!--</div>-->
+
+        <!--<div class="item">-->
+            <!--<div class="item_img">-->
+                <!--<img src="vcfyp4uxqx3png.png" alt="image"/>-->
+            <!--</div>-->
+
+            <!--<div class="item_content">-->
+                <!--<h3>示例标题示例标题</h3>-->
+                <!--<p class="item_info">作者:Sw </p>-->
+                <!--<p class="item_desc">示例内容示例内容示例内容示例内容示例内容示例内容示例内容示例内容示例内容示例内容示例内容示例内容</p>-->
+            <!--</div>-->
+        <!--</div>-->
+
+        <!--<div class="item">-->
+            <!--<div class="item_img">-->
+                <!--<img src="vcfyp4uxqx3png.png" alt="image"/>-->
+            <!--</div>-->
+
+            <!--<div class="item_content">-->
+                <!--<h3>示例标题示例标题</h3>-->
+                <!--<p class="item_info">作者:Sw </p>-->
+                <!--<p class="item_desc">示例内容示例内容示例内容示例内容示例内容示例内容示例内容示例内容示例内容示例内容示例内容示例内容</p>-->
+            <!--</div>-->
+        <!--</div>-->
+
+        <!--<div class="item">-->
+            <!--<div class="item_img">-->
+                <!--<img src="xue.jpg" alt="image"/>-->
+            <!--</div>-->
+
+            <!--<div class="item_content">-->
+                <!--<h3>示例标题示例标题</h3>-->
+                <!--<p class="item_info">作者:Sw </p>-->
+                <!--<p class="item_desc">示例内容示例内容示例内容示例内容示例内容示例内容示例内容示例内容示例内容示例内容示例内容示例内容</p>-->
+            <!--</div>-->
+        <!--</div>-->
+
+        <!--<div class="item">-->
+            <!--<div class="item_img">-->
+                <!--<img src="you" alt="image"/>-->
+            <!--</div>-->
+
+            <!--<div class="item_content">-->
+                <!--<h3>示例标题示例标题</h3>-->
+                <!--<p class="item_info">作者:Sw </p>-->
+                <!--<p class="item_desc">示例内容示例内容示例内容示例内容示例内容示例内容示例内容示例内容示例内容示例内容示例内容示例内容</p>-->
+            <!--</div>-->
+        <!--</div>-->
+
+    </div>
+
+    <div class="sidebar">
+        <div class="author">
+            <div class="author_img">
+                <img src="vcfyp4uxqx3png.png"/>
+            </div>
+            <div class="author_info">
+                <h4>twilight</h4>
+                    <p>真正重要的东西，肉眼是看不到的</p>
+            </div>
+        </div>
+        <div class="article">
+            <h3>推荐文章</h3>
+            <ul>
+                <li>推荐文章1</li>
+                <li>推荐文章2</li>
+                <li>推荐文章3</li>
+                <li>推荐文章4</li>
+                <li>推荐文章5</li>
+                <li>推荐文章6</li>
+            </ul>
+        </div>
+        <div class="site_info">
+            <p>访客100</p>
+            <p>文章数100</p>
+        </div>
+    </div>
+    <div class="clear"></div>
+
+</div>
+
+</body>
+</html>
